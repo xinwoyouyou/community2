@@ -1,0 +1,32 @@
+#body {
+    background-color: #efefef;
+}
+
+#main {
+    background-color: white;
+    margin: 30px;
+}
+
+.btn-publish {
+    float: right;
+    margin-bottom: 15px;
+}
+
+.media-object {
+    width: 55px;
+    height: 55px;
+}
+
+.text-desc {
+    font-size: 12px;
+    font-weight: normal;
+    color: #999;
+}
+
+#list-group{
+    margin-top: 25px;
+}
+#community-menu{
+    color: #999;
+    font-size: 13px;
+}
