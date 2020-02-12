@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8887
 spring:
   datasource:
     username: root
@@ -40,4 +40,4 @@ mybatis:
   mapper-locations: classpath:life/majiang/community/mapper/*.xml.
   #驼峰命名规范 如：数据库字段是  order_id 那么 实体字段就要写成 orderId
   configuration:
-    map-underscore-to-camel-case: false #驼峰命名先关闭;因为字段就是一一对应的
+    map-underscore-to-camel-case: true #驼峰命名先关闭;因为字段就是一一对应的

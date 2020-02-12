@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
+<!--navigation:导航栏-->
 <body>
 <div th:fragment="nav">
     <nav class="navbar navbar-default">
@@ -35,7 +36,9 @@
                         </ul>
                     </li>
                     <li th:unless="not ${session.user == null}">
-                        <a href="https://github.com/login/oauth/authorize?client_id=Iv1.dbf53619d7309d98&redirect_uri=http://localhost:8887/callback&scope=user&state=1">登录</a>
+                        <a href="https://github.com/login/oauth/authorize?client_id=Iv1.dbf53619d7309d98&redirect_uri=http://localhost:8887/callback&scope=user&state=1">
+                            登录
+                        </a>
                     </li>
 
                 </ul>
