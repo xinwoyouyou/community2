@@ -41,3 +41,4 @@ mybatis:
   #驼峰命名规范 如：数据库字段是  order_id 那么 实体字段就要写成 orderId
   configuration:
     map-underscore-to-camel-case: true
+

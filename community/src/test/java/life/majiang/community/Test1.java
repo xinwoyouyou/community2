@@ -74,6 +74,21 @@ class Test1 {
             System.out.println(question);
         }
     }
+    @Test
+    void test4(){
+        final QuestionExample example = new QuestionExample();
+        example.createCriteria()
+                .andCreatorEqualTo(11);
+        final List<Question> questionList = questionMapper.selectByExampleWithBLOBs(example);
+        for (Question question : questionList) {
+            System.out.println(question);
+        }
+    }
+    @Test
+    void test5(){
+        final User user = userMapper.selectByPrimaryKey(11);
+        System.out.println(user);
+    }
     }
 
 

@@ -1,5 +1,6 @@
 package life.majiang.community.controller;
 
+import com.github.pagehelper.PageInfo;
 import life.majiang.community.dto.QuestionDTO;
 import life.majiang.community.pojo.Question;
 import life.majiang.community.pojo.User;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 /**
  * 作者:悠悠我心
@@ -82,6 +85,8 @@ public class PublishController {
         question.setTag(tag);
         question.setCreator(user.getId());
         question.setId(id);
+
+
 
 
         questionService.createOrUpdate(question);

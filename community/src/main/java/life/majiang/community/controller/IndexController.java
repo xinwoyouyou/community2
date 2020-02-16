@@ -45,38 +45,26 @@ public class IndexController {
                         @RequestParam(name = "page", defaultValue = "1") Integer page, //页面
                         @RequestParam(name = "size", defaultValue = "3") Integer size  //大小
     ) {
-        final Cookie[] cookies = request.getCookies();
-        if (cookies != null && cookies.length != 0)
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("token")) {
-                    final String token = cookie.getValue();
-                    final UserExample example = new UserExample();
-                    example.createCriteria().andTokenEqualTo(token);
-                    final List<User> users = userMapper.selectByExample(example);
-                    if (users.size() != 0) {
-                        request.getSession().setAttribute("user", users.get(0));
-                    }
-                }
+        //设置分页规则
+        PageHelper.startPage(page, size);
+        //取数据，插件会自动按照规则分页显示数据
+        final List<Question> questionList = questionService.selectByExampleWithBLOBs(null);
+        final List<QuestionDTO> questionDTOList = new ArrayList<>();
 
-                //设置分页规则
-                PageHelper.startPage(page, size);
-                //取数据，插件会自动按照规则分页显示数据
-                final List<Question> questionList = questionService.selectByExampleWithBLOBs(null);
-                final List<QuestionDTO> questionDTOList = new ArrayList<>();
-                for (Question question : questionList) {
-                    final User user = userMapper.selectByPrimaryKey(question.getCreator());
-                    final QuestionDTO questionDTO = new QuestionDTO();
-                    BeanUtils.copyProperties(question, questionDTO);
-                    questionDTO.setUser(user);
-                    questionDTOList.add(questionDTO);
-                }
+        if (questionList.size() != 0) {
+            for (Question question : questionList) {
+                final User user = userMapper.selectByPrimaryKey(question.getCreator());
+                final QuestionDTO questionDTO = new QuestionDTO();
+                BeanUtils.copyProperties(question, questionDTO);
+                questionDTO.setUser(user);
+                questionDTOList.add(questionDTO);
                 final PageInfo<Object> pageInfo = new PageInfo(questionList);
+
 
                 model.addAttribute("pageInfo", pageInfo);
                 model.addAttribute("pagination", questionDTOList);
-
-
             }
+        }
         return "index";
     }
 

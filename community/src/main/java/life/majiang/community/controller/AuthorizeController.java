@@ -4,6 +4,7 @@ import life.majiang.community.dto.AccessTokenDTO;
 import life.majiang.community.dto.GitHupUser;
 import life.majiang.community.mapper.UserMapper;
 import life.majiang.community.pojo.User;
+import life.majiang.community.pojo.UserExample;
 import life.majiang.community.provider.GitHupProvider;
 import life.majiang.community.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,39 +37,36 @@ public class AuthorizeController {
     @Value("${githup.redirect_uri}")
     private String redirect_uri;
 
-   @GetMapping("/callback")
+    @GetMapping("/callback")
     public String callback(@RequestParam(name = "code") String code,
                            @RequestParam(name = "state") String state,
                            HttpServletResponse response
-   ){
-       final AccessTokenDTO tokenDTO = new AccessTokenDTO();
-       tokenDTO.setClient_id(client_id);
-       tokenDTO.setClient_secret(client_secret);
-       tokenDTO.setCode(code);
-       tokenDTO.setRedirect_uri(redirect_uri);
-       tokenDTO.setState(state);
+    ) {
+        final AccessTokenDTO tokenDTO = new AccessTokenDTO();
+        tokenDTO.setClient_id(client_id);
+        tokenDTO.setClient_secret(client_secret);
+        tokenDTO.setCode(code);
+        tokenDTO.setRedirect_uri(redirect_uri);
+        tokenDTO.setState(state);
 
-       final String accessToken = gitHupProvider.getAccessToken(tokenDTO);
-       final GitHupUser gitHupUser = gitHupProvider.gitUser(accessToken);
+        final String accessToken = gitHupProvider.getAccessToken(tokenDTO);
+        final GitHupUser gitHupUser = gitHupProvider.gitUser(accessToken);
+            if (gitHupUser != null && gitHupUser.getId() != null) {
+                final User user = new User();
+                final String token = UUID.randomUUID().toString();
+                user.setToken(token);
+                user.setName(gitHupUser.getName());
+                user.setBio(gitHupUser.getBio());
+                user.setAccountId(String.valueOf(gitHupUser.getId()));
+                user.setAvatarUrl(gitHupUser.getAvatar_url());
 
-       if (gitHupUser != null && gitHupUser.getId() != null) {
-           final User user = new User();
-           final String token = UUID.randomUUID().toString();
-           user.setToken(token);
-           user.setName(gitHupUser.getName());
-           user.setBio(gitHupUser.getBio());
-           user.setAccountId(String.valueOf(gitHupUser.getId()));
-           user.setGmtCreate(System.currentTimeMillis());
-           user.setGmtModified(user.getGmtCreate());
-           user.setAvatarUrl(gitHupUser.getAvatar_url());
-
-           userService.insertSelective(user);
-           //登录成功写cookie和session
-           final Cookie cookie = new Cookie("token",token);
-           response.addCookie(cookie);
-       } else {
-           //登录失败,重新登录
-       }
-       return "redirect:/";
+                userService.createOrUpdate(user);
+                //登录成功写cookie和session
+                final Cookie cookie = new Cookie("token", token);
+                response.addCookie(cookie);
+            } else {
+                //登录失败,重新登录
+            }
+        return "redirect:/";
     }
 }

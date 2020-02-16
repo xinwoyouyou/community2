@@ -7,6 +7,7 @@ import life.majiang.community.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -29,22 +30,20 @@ public class SessionInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         final Cookie[] cookies = request.getCookies();
-        if (cookies != null) ;
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("token")) {
-                final String token = cookie.getValue();
-                final UserExample example = new UserExample();
-                example.createCriteria()
-                        .andTokenEqualTo(token);
-                final List<User> users = userMapper.selectByExample(example);
-                if (users.size() != 0) {
-                    for (User user : users) {
-                        request.getSession().setAttribute("user", user);
+        if (cookies != null)
+            if (cookies != null && cookies.length != 0)
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().equals("token")) {
+                        final String token = cookie.getValue();
+                        final UserExample example = new UserExample();
+                        example.createCriteria().andTokenEqualTo(token);
+                        final List<User> users = userMapper.selectByExample(example);
+                        if (users.size() != 0) {
+                            request.getSession().setAttribute("user", users.get(0));
+                        }
+                        break;
                     }
                 }
-                break;
-            }
-        }
         return true;
     }
 
