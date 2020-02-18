@@ -7,4 +7,5 @@ import life.majiang.community.pojo.Question;
  */
 public interface QuestionExMapper {
     int intView(Question question);
+    int commentCount(Question question);
 }

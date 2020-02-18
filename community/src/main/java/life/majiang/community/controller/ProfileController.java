@@ -57,7 +57,7 @@ public class ProfileController {
         PageHelper.startPage(page, size);
         //取数据，插件会自动按照规则分页显示数据
         final QuestionExample example = new QuestionExample();
-        final Integer id = user.getId();
+        final Long id = user.getId();
         example.createCriteria()
                 .andCreatorEqualTo(user.getId());
         final List<Question> questionList = questionService.selectByExampleWithBLOBs(example);

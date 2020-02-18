@@ -7,7 +7,7 @@ import java.util.Map;
  * 作者:张海鹏   2019/12/20 8:00
  */
 //返回通用的类
-public class Msg {
+public class  Msg {
     //状态码 100-成功,200-失败(自定义)
     private int code;
     //提示信息
@@ -30,6 +30,15 @@ public class Msg {
         return result;
     }
 
+    //自定义处理结果
+    public static Msg errorResult(Integer key,String value) {
+        final Msg result = new Msg();
+        result.setCode(key);
+        result.setMsg(value);
+        return result;
+    }
+
+    //用户要返回给浏览器的数据
     public Msg add(String key, Object value) {
         this.getExtend().put(key, value);
         return  this;

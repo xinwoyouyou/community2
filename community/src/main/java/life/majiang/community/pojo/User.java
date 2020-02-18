@@ -1,15 +1,10 @@
 package life.majiang.community.pojo;
 
-
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class User {
-    private Integer id;
+    private Long id;
 
     private String accountId;
 
@@ -25,11 +20,11 @@ public class User {
 
     private String avatarUrl;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

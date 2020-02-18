@@ -1,6 +1,5 @@
 package life.majiang.community.controller;
 
-import com.github.pagehelper.PageInfo;
 import life.majiang.community.dto.QuestionDTO;
 import life.majiang.community.pojo.Question;
 import life.majiang.community.pojo.User;
@@ -14,8 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 
 /**
  * 作者:悠悠我心
@@ -28,7 +25,7 @@ public class PublishController {
     private QuestionService questionService;
 
     @GetMapping("/publish/{id}")
-    public String edit(@PathVariable("id") Integer id,
+    public String edit(@PathVariable("id") Long id,
                        Model model
                        ) {
         final QuestionDTO question = questionService.getById(id);
@@ -49,7 +46,7 @@ public class PublishController {
             @RequestParam(value = "title",required = false) String title,
             @RequestParam(value = "description",required = false) String description,
             @RequestParam(value = "tag",required = false) String tag,
-            @RequestParam(value = "id",required = false) Integer id,
+            @RequestParam(value = "id",required = false) long id,
             HttpServletRequest request,
             Model model
     ) {

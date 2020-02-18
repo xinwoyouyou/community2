@@ -16,6 +16,9 @@
     width: 55px;
     height: 55px;
 }
+.media-body{
+    padding-top: 16px;
+}
 
 .text-desc {
     font-size: 12px;
@@ -29,4 +32,11 @@
 #community-menu{
     color: #999;
     font-size: 15px;
+}
+#form-control{
+    margin: 10px 0;
+}
+#btn-success{
+    float: right;
+    margin-bottom: 10px;
 }

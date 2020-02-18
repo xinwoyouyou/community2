@@ -2,13 +2,10 @@ package life.majiang.community.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import life.majiang.community.dto.Msg;
 import life.majiang.community.dto.QuestionDTO;
 import life.majiang.community.mapper.UserMapper;
 import life.majiang.community.pojo.Question;
-import life.majiang.community.pojo.QuestionExample;
 import life.majiang.community.pojo.User;
-import life.majiang.community.pojo.UserExample;
 import life.majiang.community.service.QuestionService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;

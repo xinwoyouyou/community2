@@ -3,15 +3,14 @@ package life.majiang.community.mapper;
 import java.util.List;
 import life.majiang.community.pojo.Question;
 import life.majiang.community.pojo.QuestionExample;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-@Mapper
+
 public interface QuestionMapper {
     long countByExample(QuestionExample example);
 
     int deleteByExample(QuestionExample example);
 
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Long id);
 
     int insert(Question record);
 
@@ -21,7 +20,7 @@ public interface QuestionMapper {
 
     List<Question> selectByExample(QuestionExample example);
 
-    Question selectByPrimaryKey(Integer id);
+    Question selectByPrimaryKey(Long id);
 
     int updateByExampleSelective(@Param("record") Question record, @Param("example") QuestionExample example);
 

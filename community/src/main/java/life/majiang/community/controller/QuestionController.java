@@ -1,7 +1,6 @@
 package life.majiang.community.controller;
 
 import life.majiang.community.dto.QuestionDTO;
-import life.majiang.community.mapper.QuestionMapper;
 import life.majiang.community.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +20,7 @@ public class QuestionController {
 
 
     @GetMapping("/question/{id}")
-    public String question(@PathVariable("id") Integer id,
+    public String question(@PathVariable("id") long id,
                            Model model
                            ) {
         QuestionDTO questionDTO= questionService.getById(id);

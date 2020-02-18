@@ -3,11 +3,9 @@ package life.majiang.community.config;
 import life.majiang.community.mapper.UserMapper;
 import life.majiang.community.pojo.User;
 import life.majiang.community.pojo.UserExample;
-import life.majiang.community.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -28,7 +26,9 @@ public class SessionInterceptor implements HandlerInterceptor {
 
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request,
+                             HttpServletResponse response,
+                             Object handler) throws Exception {
         final Cookie[] cookies = request.getCookies();
         if (cookies != null)
             if (cookies != null && cookies.length != 0)
@@ -36,7 +36,8 @@ public class SessionInterceptor implements HandlerInterceptor {
                     if (cookie.getName().equals("token")) {
                         final String token = cookie.getValue();
                         final UserExample example = new UserExample();
-                        example.createCriteria().andTokenEqualTo(token);
+                        example.createCriteria()
+                                .andTokenEqualTo(token);
                         final List<User> users = userMapper.selectByExample(example);
                         if (users.size() != 0) {
                             request.getSession().setAttribute("user", users.get(0));

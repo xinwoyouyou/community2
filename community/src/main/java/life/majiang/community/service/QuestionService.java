@@ -10,8 +10,6 @@ import life.majiang.community.mapper.UserMapper;
 import life.majiang.community.pojo.Question;
 import life.majiang.community.pojo.QuestionExample;
 import life.majiang.community.pojo.User;
-import life.majiang.community.pojo.UserExample;
-import org.mybatis.generator.runtime.dynamic.sql.elements.SelectByExampleMethodGenerator;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,7 +49,7 @@ public class QuestionService {
     }
 
 
-    public QuestionDTO getById(Integer id) {
+    public QuestionDTO getById(Long id) {
         final QuestionDTO questionDTO = new QuestionDTO();
         final Question question = questionMapper.selectByPrimaryKey(id);
         if (question == null) {
@@ -71,7 +69,7 @@ public class QuestionService {
         return questionMapper.selectByExampleWithBLOBs(example);
     }
 
-    public void intView(Integer id) {
+    public void intView(Long id) {
         final Question question = new Question();
         question.setId(id);
         question.setViewCount(1);

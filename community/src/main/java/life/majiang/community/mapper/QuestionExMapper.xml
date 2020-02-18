@@ -8,5 +8,10 @@
         set view_count =view_count+#{viewCount,jdbcType=INTEGER}
         where id=#{id}
     </update>
+    <update id="commentCount">
+        update community.question
+        set comment_count =comment_count+#{commentCount,jdbcType=INTEGER}
+        where id=#{id}
+    </update>
 
 </mapper>
