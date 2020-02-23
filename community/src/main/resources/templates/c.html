@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!--官网提供的axios在线地址-->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<center>
+    <div id="vue">
+        <button @click="get" class="get">Get请求</button>
+        <p>{{joke}}</p>
+        <ul  v-for="(item,index) in arrList">
+            <li>
+                <span>{{index}}</span>
+                <label>{{item.user.avatarUrl}}</label>
+            </li>
+        </ul>
+    </div>
+</center>
+
+</body>
+</html>
+<script>
+    var app = new Vue({
+        el: "#vue",
+        data: {
+            joke: "测试",
+            arrList: null,
+        },
+        methods: {
+            get: function () {
+                var that = this;
+                axios.get("/comment/15").then
+                (function (response) {
+                        console.log(response.data.extend.commentDTOS[0].content);
+                        console.log(response.data.extend.commentDTOS[0].user.name);
+                        that.joke = response.data.extend.commentDTOS[0];
+                        console.log(response.data.extend.commentDTOS);
+                        that.arrList = response.data.extend.commentDTOS;
+
+                    },
+                    function (error) {
+                        console.log(error)
+                    })
+            }
+        }
+    });
+
+    /* document.querySelector(".get1").onclick = function () {
+         axios.get("/comment/a").then(function (response) {
+             console.log(response)
+         }, function (error) {
+             console.log(error)
+         })
+     }*/
+</script>

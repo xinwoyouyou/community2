@@ -12,9 +12,19 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
     <script src="/js/bootstrap.min.js"></script>
-
 </head>
-<body>
+<script type="application/javascript">
+    window.onload = function () {
+       // debugger;
+        const closable = window.localStorage.getItem("closable");
+        if (closable){
+            window.close();
+            window.localStorage.removeItem("closable");
+        }
+    }
+</script>
+
+<body id="body">
 <div th:insert="~{navigation ::nav}"></div>
 
 

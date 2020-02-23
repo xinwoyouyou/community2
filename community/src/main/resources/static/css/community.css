@@ -1,6 +1,9 @@
 #body {
     background-color: #efefef;
 }
+.body {
+    background-color: #efefef;
+}
 
 #main {
     background-color: white;
@@ -32,6 +35,8 @@
 #community-menu{
     color: #999;
     font-size: 15px;
+    display: block;
+    margin-bottom: 17px;
 }
 #form-control{
     margin: 10px 0;
@@ -39,4 +44,39 @@
 #btn-success{
     float: right;
     margin-bottom: 10px;
+}
+.comment-sp{
+    margin-top: -3px;
+}
+.menu{
+    color: #999;
+    margin-top: 5px;
+}
+.menu .icon{
+    margin-right: 12px;
+    font-size: 17px;
+    cursor: pointer;
+}
+.menu .icon:hover{
+    color: #499ef3;
+}
+.active{
+    color: #499ef3;
+}
+.comments{
+    margin-bottom: 18px;
+    border-bottom: 1px solid #eee;
+
+}
+.question-title{
+    margin-top: 30px;
+}
+.sub-comments{
+    margin-top: 15px;
+    border: 1px solid #eeee;
+    padding-top: 15px;
+    border-radius: 10px;
+}
+#pull-right{
+    margin-top: 10px;
 }

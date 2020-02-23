@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--    &lt;!&ndash;引入 JS 文件&ndash;&gt;
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>-->
+
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div>
+    <div id="vue">
+        <input type="button" value="测试" v-on:click="doIt"/>
+        <button @click="doIt">按钮</button>
+        <h4 @click="add" v-show="true">{{food}}</h4>
+    </div>
+
+    <div id="count">
+        <button @click="sub">-</button>
+        <span v-text="number"></span>
+        <button @click="add">+</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+    /*  var app = new Vue({
+          el: "#vue1",
+          data: {
+              massage: "加油,中国",
+              link: "<a href='http://www.baidu.com'>百度</a>",
+              school: {
+                  name: "小张",
+                  age: 18
+              },
+              campus: ["北京", "上海", "山西"]
+          }
+      });*/
+    var app = new Vue({
+        el: "#vue",
+        data: {
+            food: "炒鸡蛋"
+        },
+        methods: {
+            doIt: function () {
+                alert("继续努力")
+            },
+            add: function () {
+                this.food += "真好吃";
+            }
+        }
+    });
+    var app = new Vue({
+        el: "#count",
+        data: {
+            number: 1,
+        },
+        methods: {
+            add: function () {
+                if (this.number <10) {
+                    this.number++;
+                }else {
+                    alert("别点最高啦")
+                }
+            },
+            sub: function () {
+                if (this.number >0) {
+                    this.number--;
+                }else {
+                    alert("别点了到底了")
+                }
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

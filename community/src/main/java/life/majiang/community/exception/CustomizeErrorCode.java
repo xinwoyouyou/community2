@@ -13,6 +13,8 @@ public enum  CustomizeErrorCode implements ICustomizeErrorCode {
     SERVER_ERROR(500,"服务器冒烟了..."),
     TYPE_PARAM_WRONG(103,"评论类型错误或不存在"),//type_param(参数)_wrong(错误的)
     COMMENT_NOT_FOUNT(104,"回复的评论不存在."),
+    CONTENT_ID_EMPTY(105,"评论的内容不能为空"),
+
     ;
 
     private Integer code;

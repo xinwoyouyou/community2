@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.Cookie;
@@ -48,22 +49,27 @@ public class AuthorizeController {
 
         final String accessToken = gitHupProvider.getAccessToken(tokenDTO);
         final GitHupUser gitHupUser = gitHupProvider.gitUser(accessToken);
-            if (gitHupUser != null && gitHupUser.getId() != null) {
-                final User user = new User();
-                final String token = UUID.randomUUID().toString();
-                user.setToken(token);
-                user.setName(gitHupUser.getName());
-                user.setBio(gitHupUser.getBio());
-                user.setAccountId(String.valueOf(gitHupUser.getId()));
-                user.setAvatarUrl(gitHupUser.getAvatar_url());
+        if (gitHupUser != null && gitHupUser.getId() != null) {
+            final User user = new User();
+            final String token = UUID.randomUUID().toString();
+            user.setToken(token);
+            user.setName(gitHupUser.getName());
+            user.setBio(gitHupUser.getBio());
+            user.setAccountId(String.valueOf(gitHupUser.getId()));
+            user.setAvatarUrl(gitHupUser.getAvatar_url());
 
-                userService.createOrUpdate(user);
-                //登录成功写cookie和session
-                final Cookie cookie = new Cookie("token", token);
-                response.addCookie(cookie);
-            } else {
-                //登录失败,重新登录
-            }
+            userService.createOrUpdate(user);
+            //登录成功写cookie和session
+            final Cookie cookie = new Cookie("token", token);
+            response.addCookie(cookie);
+        } else {
+            //登录失败,重新登录
+        }
         return "redirect:/";
+    }
+
+    @RequestMapping("/d")
+    public String a() {
+        return "d";
     }
 }

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<center>
+    <div id="txt">
+        <h3>记事本</h3>
+        <input type="text" v-on:keyup.enter="add" v-model="inputValue">
+        <ul>
+            <li v-for="(item,index) in list">
+                <span>{{index+1}}</span>
+                <label>{{item}}</label>
+                <button @click="remove(index)">X</button>
+            </li>
+        </ul>
+        <footer v-if="list.length!=0">
+            <span v-if="list.length!=0">
+                <strong>{{list.length}}:</strong>条数据
+            </span>
+            <button v-on:click="removeAll">清空</button>
+        </footer>
+    </div>
+</center>
+<script>
+    var app = new Vue({
+            el: "#txt",
+            data: {
+                list: ["写代码", "吃饭饭", "睡觉觉"],
+                inputValue: "好好学习,天天向上",
+            },
+            methods: {
+                add: function () {
+                    this.list.push(this.inputValue)
+                },
+                remove: function (index) {
+                    console.log("删除")
+                    console.log(index)
+                    this.list.splice(index, 1)
+                },
+                removeAll: function () {
+                    console.log("清空所有")
+                    this.list = []
+                },
+
+            }
+        }
+    )
+</script>
+</body>
+</html>

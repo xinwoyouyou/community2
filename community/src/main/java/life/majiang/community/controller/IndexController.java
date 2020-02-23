@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import life.majiang.community.dto.QuestionDTO;
 import life.majiang.community.mapper.UserMapper;
 import life.majiang.community.pojo.Question;
+import life.majiang.community.pojo.QuestionExample;
 import life.majiang.community.pojo.User;
 import life.majiang.community.service.QuestionService;
 import org.springframework.beans.BeanUtils;
@@ -45,7 +46,9 @@ public class IndexController {
         //设置分页规则
         PageHelper.startPage(page, size);
         //取数据，插件会自动按照规则分页显示数据
-        final List<Question> questionList = questionService.selectByExampleWithBLOBs(null);
+        final QuestionExample example = new QuestionExample();
+        example.setOrderByClause("gmt_create desc");
+        final List<Question> questionList = questionService.selectByExampleWithBLOBs(example);
         final List<QuestionDTO> questionDTOList = new ArrayList<>();
 
         if (questionList.size() != 0) {

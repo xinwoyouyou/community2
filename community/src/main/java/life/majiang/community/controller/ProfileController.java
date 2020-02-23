@@ -29,8 +29,6 @@ import java.util.List;
 public class ProfileController {
     @Autowired
     private QuestionService questionService;
-    @Autowired(required = false)
-    private UserMapper userMapper;
 
     @GetMapping("/profile/{action}")
     public String profile(@PathVariable("action") String action,
