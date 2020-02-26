@@ -80,3 +80,24 @@
 #pull-right{
     margin-top: 10px;
 }
+.question_tag{
+    margin-right: 10px;
+}
+.question-rated{
+    line-height: 20px;
+    font-size: 12px;
+    margin-left: 0;
+    list-style: none;
+    padding-left: 0;
+}
+.weiChat{
+    width: 60%;
+}
+.publish-tag-tap{
+    display:none;
+    margin-top:10px;
+    padding-top: 10px;
+}
+.publish-tag-tap .label-info{
+    margin-right: 10px;
+}

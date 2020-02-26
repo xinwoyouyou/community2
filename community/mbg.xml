@@ -36,8 +36,9 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
         <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名(不生成模板类)-->
-       <!-- <table tableName="user" domainObjectName="User"/>-->
+       <!-- <table tableName="user" domainObjectName="User"/>
         <table tableName="question" domainObjectName="Question"/>
-        <table tableName="comment" domainObjectName="Comment"/>
+        <table tableName="comment" domainObjectName="Comment"/>-->
+        <table tableName="notification" domainObjectName="Notification"/>
     </context>
 </generatorConfiguration>

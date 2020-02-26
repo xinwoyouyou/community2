@@ -10,11 +10,14 @@ import life.majiang.community.mapper.UserMapper;
 import life.majiang.community.pojo.Question;
 import life.majiang.community.pojo.QuestionExample;
 import life.majiang.community.pojo.User;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 作者:悠悠我心
@@ -75,5 +78,25 @@ public class QuestionService {
         question.setViewCount(1);
         questionExMapper.intView(question);
 
+    }
+
+    public List<QuestionDTO> selectRelated(QuestionDTO questiondto) {
+        if (StringUtils.isBlank(questiondto.getTag())) {
+            return new ArrayList<>();
+        }
+        final String[] tags = StringUtils.split(questiondto.getTag(), ',');
+        final String replaceTag = StringUtils.replace(questiondto.getTag(), ",", "|");
+        final Question question = new Question();
+        question.setId(questiondto.getId());
+        question.setTag(replaceTag);
+
+        final List<Question> questions = questionExMapper.selectRelated(question);
+        final List<QuestionDTO> questionDTOList = questions.stream().map(q -> {
+            final QuestionDTO questionDTO = new QuestionDTO();
+            BeanUtils.copyProperties(q, questionDTO);
+            return questionDTO;
+        }).collect(Collectors.toList());
+
+        return questionDTOList;
     }
 }

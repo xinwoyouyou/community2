@@ -41,7 +41,7 @@ public class IndexController {
     public String index(HttpServletRequest request,
                         Model model,
                         @RequestParam(name = "page", defaultValue = "1") Integer page, //页面
-                        @RequestParam(name = "size", defaultValue = "3") Integer size  //大小
+                        @RequestParam(name = "size", defaultValue = "4") Integer size  //大小
     ) {
         //设置分页规则
         PageHelper.startPage(page, size);

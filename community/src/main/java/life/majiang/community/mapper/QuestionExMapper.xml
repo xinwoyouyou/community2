@@ -13,5 +13,12 @@
         set comment_count =comment_count+#{commentCount,jdbcType=INTEGER}
         where id=#{id}
     </update>
+    <select id="selectRelated" resultType="question">
+        select *
+        from community.question
+        where id != #{id}
+        and tag regexp #{tag}
+        ;
+    </select>
 
 </mapper>

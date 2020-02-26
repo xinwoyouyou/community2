@@ -51,6 +51,8 @@ function comment(e) {
 function collapseComment(e) {
     const id = e.getAttribute("data-id");
     const comments = $("#comment-" + id);
+
+    var $test = $("#twoComment");
     //开关 单击添加,再单击移除
     comments.toggleClass("in");
     //获取二级评论的展开状态
@@ -58,7 +60,6 @@ function collapseComment(e) {
     if (hasClass) {
         $.getJSON("/comment/" + id, function (data) {
             var html = "";
-            var html2="";
             var commentDTOS = data.extend.commentDTOS;
             if (commentDTOS == null || commentDTOS == "") {
                 return;
@@ -85,28 +86,37 @@ function collapseComment(e) {
                     "</div>" +
                     "<div class=\"menu\">" +
                     "<span class=\"pull-right\">" +
-                      new Date(gmtCreate)+
+                    //moment(gmtCreate).format('YYYY-MM-DD HH:mm:ss')+
+                    new Date(gmtCreate) +
                     "</span>" +
                     "</div>" +
                     "</div>" +
                     "</div>" +
                     "</div>";
             }
-             var commentId = $("#comment-" + id);
+            var commentId = $("#comment-" + id);
+            commentId.html(html);
 
-            html2+="  <div class=\"col-lg-12 col-md-12 col-sm-12 col-xs-12 comments\">\n" +
-                "                                    <input type=\"text\" class=\"form-control\" placeholder=\"评论一下...\"\n" +
-                "                                           th:id=\"form-control+${comment.id}\">\n" +
-                "                                    <button type=\"button\" class=\"btn btn-success pull-right\" id=\"pull-right\"\n" +
-                "                                            onclick=\"comment(this)\" th:data-id=\"${comment.id}\">评论\n" +
-                "                                    </button>\n" +
-                "                                </div>";
-            commentId.html(html+html2);
         });
 
 
     } else {
         e.classList.remove("active");
+    }
+}
+
+function showSelectTag() {
+    $("#select-tag").show();
+}
+
+function selectTag(e) {
+    const value = e.getAttribute("data-tag");
+    var previous = $("#tag").val();//previous:以前的
+
+    if (previous.length != 0) {//previous.indexOf(value) == -1
+        $("#tag").val(previous + "," + value);
+    } else {
+        $("#tag").val(value);
     }
 }
 
